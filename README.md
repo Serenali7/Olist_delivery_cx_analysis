@@ -52,14 +52,14 @@ The order lifecycle is decomposed into three stages to pinpoint bottlenecks:
 ## 4. Key Findings(draft)
 Detailed quantitative results will be documented after metric validation and diagnostic analysis.
 ### 4.1 Impact of Delivery Delay on Customer Satisfaction:
-  Delivery performance has a strong and nonlinear impact on customer experience. Orders delivered
-  late show a 1.73-point average drop in review score compared to on-time deliveries (4.29 vs 2.57).
-  <img width="280" height="45" alt="Screenshot 2026-02-06 at 16 23 24" src="https://github.com/user-attachments/assets/f5898091-fa03-4501-9d96-92c5fe45370c" />
+Delivery performance has a strong and nonlinear impact on customer experience. Orders delivered
+late show a 1.73-point average drop in review score compared to on-time deliveries (4.29 vs 2.57).
+<img width="280" height="45" alt="Screenshot 2026-02-06 at 16 23 24" src="https://github.com/user-attachments/assets/f5898091-fa03-4501-9d96-92c5fe45370c" />
 
-  Further bucket analysis reveals a clear satisfaction threshold at 3 days of delay. While short delays (1–2 days)
-  lead to moderate dissatisfaction, delays beyond 3 days cause review scores to collapse and 1-star review rates to exceed 48%.
-  For delays over 6 days, negative reviews become the dominant outcome, with nearly 70% of orders receiving 1-star ratings.
-  <img width="272" height="106" alt="Screenshot 2026-02-06 at 16 24 45" src="https://github.com/user-attachments/assets/de0ae6ad-fe56-45c5-9804-09aae969a68b" />
+Further bucket analysis reveals a clear satisfaction threshold at 3 days of delay. While short delays (1–2 days)
+lead to moderate dissatisfaction, delays beyond 3 days cause review scores to collapse and 1-star review rates to exceed 48%.
+For delays over 6 days, negative reviews become the dominant outcome, with nearly 70% of orders receiving 1-star ratings.
+<img width="272" height="106" alt="Screenshot 2026-02-06 at 16 24 45" src="https://github.com/user-attachments/assets/de0ae6ad-fe56-45c5-9804-09aae969a68b" />
 
 ### 4.2 Bottleneck Diagnosis: Seller vs. Carrier Responsibility
 Late deliveries are driven primarily by downstream logistics rather than seller preparation inefficiencies.
@@ -67,6 +67,7 @@ Late deliveries are driven primarily by downstream logistics rather than seller 
 Across all orders, late deliveries exhibit both longer seller preparation times and significantly extended carrier lead times. However, the magnitude 
 of delay is disproportionately driven by carrier performance. While seller preparation time increases by approximately 2 days for late orders, 
 carrier lead time increases by nearly 18 days on average.
+
 <img width="377" height="50" alt="Screenshot 2026-02-06 at 16 43 28" src="https://github.com/user-attachments/assets/153a2ae5-4ac6-467a-81ac-b9c7e81af239" />
 
 Further decomposition by delay severity reveals a clear escalation pattern. As delivery delays increase from 1–2 days to over 10 days, 
