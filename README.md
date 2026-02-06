@@ -1,8 +1,13 @@
 # E-commerce Delivery Performance & Customer Experience
-> **Delay Drivers and Customer Impact Analysis**
+
+**Delay Drivers and Customer Experience Impact Analysis**  
+Olist Brazilian E-Commerce Public Dataset (~100k orders)
+
+![Pipeline Diagram](pipeline_diagram.png)
 
 ## 1. Background & Business Context
-In the e-commerce industry, fulfillment capability is not just an operational cost—it is a core driver of customer retention. This project utilizes the **Olist Brazilian E-Commerce Dataset** (100k+ real orders) to analyze how delivery performance directly shapes customer experience.
+In the e-commerce industry, fulfillment capability is not just an operational cost—it is a core driver of customer retention. This project utilizes the **Olist Brazilian E-Commerce Dataset** (100k+ real orders) to analyze how delivery performance directly shapes customer experience. 
+This analysis focuses on translating delivery performance signals into measurable, actionable operational metrics.
 
 **Key Business Questions:**
 1. **Satisfaction Correlation:** To what extent does delivery delay impact our average Review Scores?
@@ -13,14 +18,14 @@ In the e-commerce industry, fulfillment capability is not just an operational co
 
 ## 2. Data Source
 * **Dataset:** Brazilian E-Commerce Public Dataset by Olist (available on Kaggle). 
-  https://www.kaggle.com/api/v1/datasets/download/olistbr/brazilian-ecommerce
-* **Scale:** 100,000+ orders spanning 2016 to 2018.
-* **Key Tables:** Orders, Order Items, Reviews, Sellers, Customers, Products, and Geolocation.
-* **Data Limitations:** * Historical data (pre-2018) may not reflect current infrastructure improvements.
-    * The overall repeat purchase rate is naturally low (~3%-5%); analysis focuses on the relative difference in retention intent between "On-time" vs. "Late" groups.
-
+* **Scale:** 100k+ orders (2016–2018).
+* **Core Tables:** Orders, Order Items, Reviews, Sellers, Customers, Products, and Geolocation.
+**Notes & Limitations**
+- Historical data (pre-2018); patterns may not reflect recent infrastructure improvements.
+- Repeat purchase rate is naturally low (~3–5%); analysis focuses on relative behavioral differences between on-time and late deliveries.
 
 ## 3. Key Metric Definitions
+All metrics are computed at the order level unless otherwise specified.
 The following metrics are defined to quantify performance:
 
 | Metric | Definition / Formula | Business Value |
@@ -47,24 +52,27 @@ The order lifecycle is decomposed into three stages to pinpoint bottlenecks:
 
 ### 4.3 Segment Analysis
 * **Geospatial Analysis:** Using `geolocation` data to map late delivery hotspots across Brazilian states (e.g., SP vs. North regions).
-* **Seller Tiering:** * **Tier A (Top):** On-time rate > 95%.
-    * **Tier C (High Risk):** On-time rate < 80% (Targets for operational intervention).
+* **Seller Tiering:**
+  * **Tier A (Top):** On-time rate > 95%
+  * **Tier C (High Risk):** On-time rate < 80% (targets for operational intervention)
 
 
-## 5. Key Findings
-*(Note: Replace 'X' with your specific analysis results)*
-* **Delay Impact:** Delayed orders result in an average review score decrease of **X.X points**.
-* **Primary Bottleneck:** Over **X%** of delays originate in the `Shipped → Delivered` stage, primarily due to long-haul logistics in specific states.
-* **Threshold Effect:** Once a delay exceeds **X days**, the probability of receiving a 1-star review increases by **X%**.
+## 5. Key Findings(draft)
+Detailed quantitative results will be documented after metric validation and diagnostic analysis.
 
 
-## 6. Business Recommendations
-1. **Dynamic Estimated Delivery Date (EDD):** Implement more conservative EDDs for high-risk regions to manage customer expectations.
-2. **Seller Performance Governance:** Enforce stricter SLAs for Tier C sellers; implement "search de-ranking" for sellers who consistently miss dispatch windows.
-3. **Logistics Monitoring Dashboard:** Monitor the 7-day Rolling Late Rate to identify regional logistics failures before they impact monthly KPIs.
+## 6. Business Recommendations(draft)
+Recommendations will be refined based on finalized findings and robustness checks.
 
+## 7. Project Structure
+- `pipeline_diagram.png`  
+  End-to-end workflow overview
+- `/sql/`  
+  SQL scripts for metric creation, delay flags, and rolling window analysis
+- `/notebooks/`  
+  Exploratory analysis and visualization of delivery performance and customer experience
 
-## 7. Tools & Skills
+## 8. Tools & Skills
 * **Language:** Python (Pandas for cleaning, Matplotlib/Seaborn for visualization).
 * **Analytics Skills:** Descriptive Statistics, Root Cause Analysis, Business Metric Design, Geospatial Analysis.
 
