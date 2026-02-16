@@ -1,149 +1,123 @@
 # E-commerce Delivery Performance & Customer Experience
 
-**Delay Drivers and Customer Experience Impact Analysis**  
-Olist Brazilian E-Commerce Public Dataset (~100k orders)
-
-![Pipeline Diagram](pipeline_diagram.png)
-
 ## 1. Background & Business Context
-In the e-commerce industry, fulfillment capability is not just an operational cost—it is a core driver of customer retention. This project utilizes the **Olist Brazilian E-Commerce Dataset** (100k+ real orders) to analyze how delivery performance directly shapes customer experience. 
-This analysis focuses on translating delivery performance signals into measurable, actionable operational metrics.
+In e-commerce, delivery reliability directly impacts customer retention and brand trust.  
+This project analyzes 100k+ real orders from the Olist Brazilian marketplace to:
+- Quantify how delivery delays affect customer satisfaction
+- Identify whether sellers or logistics partners drive fulfillment failures
+- Detect operational risk signals before negative reviews spike
+- Provide actionable, operations-level recommendations
 
-**Key Business Questions:**
+## 2. Key Business Questions:
 1. **Satisfaction Correlation:** To what extent does delivery delay impact our average Review Scores?
 2. **Bottleneck Diagnosis:** Is the delay caused by sellers (slow dispatch) or logistics partners (slow last-mile delivery)?
 3. **Risk Distribution:** Which geographic regions or seller segments are the primary contributors to fulfillment failure?
 4. **Early Warning Signals:** How can we establish operational metrics to detect logistics risks before negative reviews spike?
 
+# Key Performance
 
-## 2. Key Metric Definitions
-All metrics are computed at the order level unless otherwise specified.
-The following metrics are defined to quantify performance:
+<img width="846" height="70" alt="Screenshot 2026-02-16 at 13 03 59" src="https://github.com/user-attachments/assets/03d290d9-cb80-4bdd-a990-19a440450b43" />
 
-| Metric | Definition / Formula | Business Value |
-| :--- | :--- | :--- |
-| **Late Delivery Rate** | # of Late Orders / Total Orders | Measures overall fulfillment reliability. |
-| **Seller Prep Time** | `shipping_limit_date` - `purchase_time` | Evaluates seller warehouse efficiency. |
-| **Carrier Lead Time** | `delivered_customer` - `delivered_carrier` | Measures third-party logistics (3PL) performance. |
-| **Review Score Gap** | Avg. Score (On-time) - Avg. Score (Late) | Quantifies brand equity loss due to delays. |
-| **Rolling Late Rate** | Late rate over the last 7 or 28 days | Acts as a proactive operational health indicator. |
+- **Late Rate:** 7.87%
+- **Avg Carrier Time:** 9.28 days
+- **Avg Delay (Late Only):** 10.62 days
+- **Avg Seller Prep Time:** 2.71 days
 
+Even a single-digit late rate translates into thousands of affected customers, making delay mitigation a high-impact operational priority.
 
-## 3. Analysis Framework
+# Delivery Delay Strongly Damages Customer Satisfaction
 
-### 3.1 Fulfillment Lead Time Decomposition
-The order lifecycle is decomposed into three stages to pinpoint bottlenecks:
-* **Stage 1: Order → Approval:** Time taken for payment clearance and fraud check.
-* **Stage 2: Approval → Carrier (Seller Time):** Time taken by the seller to pick, pack, and hand over to the carrier.
-* **Stage 3: Carrier → Customer (Logistics Time):** Time taken for the "last-mile" delivery.
+<img width="1012" height="721" alt="Screenshot 2026-02-16 at 13 23 37" src="https://github.com/user-attachments/assets/be992cc5-32ac-4cb5-a556-cd7fec61e5f7" />
 
-### 3.2 Impact on Customer Experience
-* **Score Decay:** Quantifying the correlation between days of delay and `review_score`.
-* **Satisfaction Threshold:** Identifying the "breaking point" where customer dissatisfaction turns into 1-star reviews.
-* **Repeat Purchase Proxy:** Analyzing the behavioral difference in future purchase intent between on-time and delayed customers.
+Late deliveries result in a **1.73-point drop** in review score:
 
-### 3.3 Segment Analysis
-* **Geospatial Analysis:** Using `geolocation` data to map late delivery hotspots across Brazilian states (e.g., SP vs. North regions).
-* **Seller Tiering:**
-  * **Tier A (Top):** On-time rate > 95%
-  * **Tier C (High Risk):** On-time rate < 80% (targets for operational intervention)
+| Delivery Status | Avg Review |
+|-----------------|------------|
+| On-time         | 4.29       |
+| Late            | 2.57       |
+
+### Critical Threshold Identified
+- 1–2 day delay → moderate dissatisfaction
+- **3+ days delay → review collapse**
+- 6+ days delay → ~70% of orders receive 1-star ratings
+
+**Insight:**  
+Preventing delays beyond 3 days dramatically reduces reputation damage.
 
 
-## 4. Key Findings(draft)
-Detailed quantitative results will be documented after metric validation and diagnostic analysis.
-### 4.1 Impact of Delivery Delay on Customer Satisfaction:
-Delivery performance has a strong and nonlinear impact on customer experience. Orders delivered
-late show a 1.73-point average drop in review score compared to on-time deliveries (4.29 vs 2.57).
-<img width="280" height="45" alt="Screenshot 2026-02-06 at 16 23 24" src="https://github.com/user-attachments/assets/f5898091-fa03-4501-9d96-92c5fe45370c" />
+# Bottleneck Diagnosis: Carrier is the Primary Risk Driver
 
-Further bucket analysis reveals a clear satisfaction threshold at 3 days of delay. While short delays (1–2 days)
-lead to moderate dissatisfaction, delays beyond 3 days cause review scores to collapse and 1-star review rates to exceed 48%.
-For delays over 6 days, negative reviews become the dominant outcome, with nearly 70% of orders receiving 1-star ratings.
-<img width="272" height="106" alt="Screenshot 2026-02-06 at 16 24 45" src="https://github.com/user-attachments/assets/de0ae6ad-fe56-45c5-9804-09aae969a68b" />
+<img width="853" height="713" alt="Screenshot 2026-02-16 at 13 24 08" src="https://github.com/user-attachments/assets/3f0ed14f-9436-49fc-a9e3-4c3a8e444c7d" />
 
-### 4.2 Bottleneck Diagnosis: Seller vs. Carrier Responsibility
-Late deliveries are driven primarily by downstream logistics rather than seller preparation inefficiencies.
+Among late orders:
+- Seller prep increases by ~2 days
+- Carrier time increases by ~18 days
+- 86% of late orders are carrier-driven
 
-Across all orders, late deliveries exhibit both longer seller preparation times and significantly extended carrier lead times. However, the magnitude 
-of delay is disproportionately driven by carrier performance. While seller preparation time increases by approximately 2 days for late orders, 
-carrier lead time increases by nearly 18 days on average.
+As delay severity rises, carrier time grows **non-linearly**, while seller prep time rises modestly.
 
-<img width="377" height="50" alt="Screenshot 2026-02-06 at 16 43 28" src="https://github.com/user-attachments/assets/153a2ae5-4ac6-467a-81ac-b9c7e81af239" />
-
-Further decomposition by delay severity reveals a clear escalation pattern. As delivery delays increase from 1–2 days to over 10 days, 
-average seller preparation time rises gradually, whereas carrier lead time increases sharply and nonlinearly. Orders delayed by more than 10 days 
-experience an average carrier lead time exceeding 40 days.
-<img width="375" height="108" alt="Screenshot 2026-02-06 at 16 44 10" src="https://github.com/user-attachments/assets/e016a5c1-bb39-491b-a358-120cd34d8f3e" />
-
-Attribution analysis confirms this imbalance: approximately 86% of delayed orders are classified as carrier-driven, compared to only 14% attributed to seller delays. This indicates that last-mile logistics performance is the dominant operational bottleneck affecting fulfillment reliability.
-<img width="212" height="66" alt="Screenshot 2026-02-06 at 16 44 46" src="https://github.com/user-attachments/assets/6434478a-8d56-45b9-9981-041c44869e35" />
-
-### 4.3 Risk Segmentation: High-Risk Sellers and Operational Exposure
-Seller-level analysis reveals substantial performance heterogeneity across the platform.
-
-After filtering to sellers with sufficient order volume (≥ 50 orders) to ensure statistical reliability, 
-late delivery rates vary widely across sellers, indicating that fulfillment risk is not evenly distributed.
-
-A small subset of sellers exhibits consistently elevated late delivery rates, contributing disproportionately to overall fulfillment failures. 
-These high-risk sellers represent clear targets for operational intervention, such as SLA renegotiation, seller coaching, or temporary traffic throttling.
-
-This segmentation framework enables the platform to shift from reactive issue handling to proactive risk management by 
-focusing resources on structurally underperforming sellers rather than isolated incidents.
-
-### 4.4 Early Warning Signals from Rolling Late Rate
-Daily late delivery rates are highly volatile and unsuitable for operational monitoring.  
-However, a 7-day rolling late rate provides a stable and interpretable signal that reveals emerging fulfillment risks before customer reviews deteriorate.
-
-Spikes in the rolling late rate often precede sustained periods of high delay frequency, making it a practical early warning indicator for logistics performance.
+**Insight:**  
+Last-mile logistics, not warehouse prep, is the dominant operational bottleneck.
 
 
-## 5. Business Recommendations(draft)
-### 5.1 SLA Threshold Redesign
-Rather than optimizing average delivery time, fulfillment operations should prioritize preventing delays beyond 3 days.
-Establishing a 3-day late-delivery threshold as a critical SLA boundary can significantly reduce reputation damage with minimal operational overhead.
+# Risk Concentration: Not All Sellers Are Equal
 
-### 5.2 Logistics-Focused Intervention Strategy
-Given that the majority of delivery delays originate from carrier lead time rather than seller preparation, operational improvement efforts 
-should prioritize logistics partners over seller-side process optimization.
+<img width="852" height="710" alt="Screenshot 2026-02-16 at 13 11 25" src="https://github.com/user-attachments/assets/d815b850-7f5c-49b6-86db-45097a1ce440" />
 
-Recommended actions include:
-- Introducing carrier-level performance monitoring with rolling late-delivery metrics.
-- Differentiating SLA thresholds by geographic region to account for last-mile risk.
-- Implementing early-warning triggers when carrier lead times exceed historical baselines.
-- Rebalancing shipment volume away from consistently underperforming carriers in high-risk regions.
+Late rate distribution across sellers is highly uneven.
+A small subset of sellers contribute disproportionately to fulfillment failures.
 
-### 5.3 Tier-Based Seller Risk Management
-Seller fulfillment risk is highly concentrated among a small subset of sellers.  
-Rather than enforcing uniform policies, Olist should apply tier-based seller management:
+**Operational Impact:**
+- Targeted SLA renegotiation
+- Tier-based traffic throttling
+- Risk-weighted seller monitoring
 
-- Prioritize intervention on high–late-rate sellers with sufficient order volume
-- Apply stricter SLA enforcement or traffic throttling for Tier C sellers
-- Minimize friction for consistently on-time sellers
+This shifts operations from reactive complaint handling to proactive risk management.
 
-### 5.4 Proactive Logistics Risk Monitoring
+# Early Warning Signal: Rolling 7-Day Late Rate
+<img width="1015" height="713" alt="Screenshot 2026-02-16 at 13 10 07" src="https://github.com/user-attachments/assets/ba70eba1-b93a-48ed-a46f-be85f1e1dbba" />
 
-Olist should operationalize a rolling 7-day late delivery rate as a core monitoring metric.  
-When the rolling late rate exceeds predefined thresholds, targeted investigations can be triggered before negative reviews spike.
+Daily late rate is highly volatile.  
+However, a 7-day rolling average provides a stable operational signal.
+Spikes in rolling late rate consistently precede sustained delay waves.
 
-This shifts fulfillment management from reactive issue handling to proactive risk prevention.
+**Business Value:**
+- Acts as early logistics health indicator
+- Enables proactive carrier intervention
+- Prevents downstream review damage
 
-## 6. Data Source
-* **Dataset:** Brazilian E-Commerce Public Dataset by Olist (available on Kaggle). 
-* **Scale:** 100k+ orders (2016–2018).
-* **Core Tables:** Orders, Order Items, Reviews, Sellers, Customers, Products, and Geolocation.
-**Notes & Limitations**
-- Historical data (pre-2018); patterns may not reflect recent infrastructure improvements.
-- Repeat purchase rate is naturally low (~3–5%); analysis focuses on relative behavioral differences between on-time and late deliveries.
 
-## 7. Project Structure
-- `pipeline_diagram.png`  
-  End-to-end workflow overview
-- `/sql/`  
-  SQL scripts for metric creation, delay flags, and rolling window analysis
-- `/notebooks/`  
-  Exploratory analysis and visualization of delivery performance and customer experience
+# Business Recommendations
 
-## 8. Tools & Skills
-* **Language:** Python (Pandas for cleaning, Matplotlib/Seaborn for visualization).
-* **Analytics Skills:** Descriptive Statistics, Root Cause Analysis, Business Metric Design, Geospatial Analysis.
+### 1. Redefine SLA Around 3-Day Threshold
+Rather than optimizing averages, focus on preventing delays beyond 3 days.
 
+### 2. Carrier-Focused Optimization Strategy
+- Monitor carrier performance using rolling metrics
+- Reallocate volume away from underperforming carriers
+- Implement region-adjusted SLA thresholds
+
+### 3. Tier-Based Seller Governance
+- Intervene on high-risk sellers with sufficient order volume
+- Reduce friction for consistently on-time sellers
+
+### 4. Operationalize Rolling Late Rate
+Embed rolling 7-day late rate into monitoring dashboards as an early warning metric.
+
+# Technical Implementation
+**SQL (Primary Engine):**
+- Order-level metric engineering
+- Delay decomposition logic
+- Bottleneck attribution
+- Rolling window calculations
+- Star schema modeling (fact + dimensions)
+
+**Visualization:**
+- Tableau Dashboard
+- KPI monitoring
+- Delay decomposition charts
+- Risk segmentation matrix
+
+Dataset: Brazilian E-Commerce Public Dataset by Olist (Kaggle)  
+Time Range: 2016–2018  
+Scale: 100k+ orders
