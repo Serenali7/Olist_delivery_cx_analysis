@@ -29,20 +29,24 @@ Two executive dashboards were built to separate customer impact from operational
 <img width="988" height="787" alt="Screenshot 2026-02-19 at 14 12 22" src="https://github.com/user-attachments/assets/8ffae9f4-0725-47f9-a8ac-2843233d05a2" />
 
 **Focuses:**
+
 - Late Rate KPI
 - Average Delay
 - Review Score Impact Analysis
 - Late Rate by Review Level
+
 This dashboard quantifies how logistics reliability translates into measurable customer experience shifts.
 
 ### Dashboard 2 – Operational Diagnosis
 <img width="984" height="786" alt="Screenshot 2026-02-19 at 14 13 20" src="https://github.com/user-attachments/assets/a070c001-0a27-4a20-99c0-cc9344337304" />
 
 **Focuses:**
+
 - Carrier vs Seller Delay Attribution
 - Delivery Component Comparison
 - State-Level Risk Matrix
 - High-Risk Time Period Identification
+
 This dashboard identifies structural bottlenecks and risk concentration drivers.
 
 ## 4. Key Performance Metrics
@@ -84,6 +88,7 @@ Among late orders:
 - ~80% are carrier-driven
 - Seller-driven delays account for ~15–18%
 - Mixed cases are minimal
+
 **Insight:**  
 - Last-mile logistics performance, rather than warehouse prep time, is the dominant contributor to late delivery.
 - Operational focus should prioritize carrier management rather than seller SLAs.
@@ -95,13 +100,16 @@ Among late orders:
 
 ### 5.5 Risk Concentration: State-Level Performance Matrix
 <img width="889" height="717" alt="Screenshot 2026-02-19 at 13 56 34" src="https://github.com/user-attachments/assets/8ef23c57-6459-4d1f-b414-30412d359a31" />
+
 **State-level matrix reveals:**
 - High late-rate & high seller-prep zones
 - High late-rate but normal prep → carrier-driven regions
+
 This enables targeted SLA renegotiation and risk-weighted monitoring strategies.
 
 ### 5.6 Seasonal Risk Concentration
 <img width="388" height="725" alt="Screenshot 2026-02-19 at 13 59 43" src="https://github.com/user-attachments/assets/f0ebe5ae-4706-4e54-849b-c7f4c77ed4b7" />
+
 **Certain months exhibit significantly elevated late rates, suggesting:**
 - Capacity constraints
 - Seasonal surges
