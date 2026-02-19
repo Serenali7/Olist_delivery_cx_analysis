@@ -37,8 +37,8 @@ Identifies operational drivers and risk concentration behind fulfillment failure
 4. **Risk Segmentation & Trend:** Where and when are late delivery risks concentrated?
 
 ## 4. Key Insights
-### Key Performance
 
+### Key Performance
 - **Late Rate:** 7.87%
 - **Avg Carrier Time:** 9.28 days
 - **Avg Delay (Late Only):** 10.62 days
@@ -64,7 +64,6 @@ Delivery reliability directly influences reputation risk.
 
 **Customer Ratings Reflect Delivery Risk**
 Late delivery probability drops from 30% (1★ reviews) to under 2% (5★ reviews), demonstrating a strong negative correlation between logistics performance and customer satisfaction.
-
 **Insight:**
 Low ratings are strongly correlated with higher late delivery rates.
 Logistics performance is a primary driver of customer dissatisfaction.
@@ -77,7 +76,6 @@ Among late orders:
 - ~80% are carrier-driven
 - Seller-driven delays account for ~15–18%
 - Mixed cases are minimal
-
 **Insight:**  
 - Last-mile logistics performance, rather than warehouse prep time, is the dominant contributor to late delivery.
 - Operational focus should prioritize carrier management rather than seller SLAs.
@@ -94,11 +92,9 @@ Among late orders:
 **States vary significantly in:**
 - Late rate
 - Seller preparation time
-
 **The matrix enables identification of:**
 - High late-rate & high seller prep risk zones
 - High late-rate but normal prep time → likely carrier-driven regions
-
 **Operational Impact:**
 - Targeted SLA renegotiation
 - Tier-based traffic throttling
@@ -112,7 +108,6 @@ Among late orders:
 Certain months exhibit significantly higher late rates, indicating seasonal or capacity-driven logistics constraints.
 
 ## 5. Business Recommendations
-
 ### 1. Carrier-Focused Optimization Strategy
 - Monitor carrier-driven delays
 - Reallocate volume away from underperforming regions
