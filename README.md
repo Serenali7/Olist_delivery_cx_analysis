@@ -4,7 +4,6 @@
 This project analyzes 100k+ real orders from the Brazilian Olist marketplace (2016–2018) to quantify how delivery reliability impacts customer satisfaction and identify operational drivers behind late deliveries.
 **Key finding:**
 Even a 7.87% late rate materially impacts customer experience, with late deliveries associated with a 1.9-point drop in review score.
-
 The analysis decomposes delays into seller-driven vs carrier-driven components and identifies geographic and temporal risk concentration patterns.
 
 ## 2. Business Context
@@ -13,6 +12,7 @@ The analysis decomposes delays into seller-driven vs carrier-driven components a
 - Repeat purchase behavior
 - Brand trust
 - Operational cost
+
 **This project addresses four core business questions:**
 - How strongly does delivery delay impact review scores?
 - Are delays primarily seller-driven or carrier-driven?
