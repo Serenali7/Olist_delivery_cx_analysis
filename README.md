@@ -27,6 +27,7 @@ Two executive dashboards were built to separate customer impact from operational
 
 ### Dashboard 1 – Customer Impact & Trend
 <img width="988" height="787" alt="Screenshot 2026-02-19 at 14 12 22" src="https://github.com/user-attachments/assets/8ffae9f4-0725-47f9-a8ac-2843233d05a2" />
+
 **Focuses:**
 - Late Rate KPI
 - Average Delay
@@ -36,6 +37,7 @@ This dashboard quantifies how logistics reliability translates into measurable c
 
 ### Dashboard 2 – Operational Diagnosis
 <img width="984" height="786" alt="Screenshot 2026-02-19 at 14 13 20" src="https://github.com/user-attachments/assets/a070c001-0a27-4a20-99c0-cc9344337304" />
+
 **Focuses:**
 - Carrier vs Seller Delay Attribution
 - Delivery Component Comparison
