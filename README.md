@@ -8,11 +8,33 @@ This project analyzes 100k+ real orders from the Olist Brazilian marketplace to:
 - Detect operational risk signals before negative reviews spike
 - Provide actionable, operations-level recommendations
 
-## 2. Key Business Questions:
+## 2.Dashboard Overview
+This project is structured into two primary dashboards:
+**Dashboard 1 – Customer Impact & Trend**
+
+<img width="988" height="787" alt="Screenshot 2026-02-19 at 14 12 22" src="https://github.com/user-attachments/assets/8ffae9f4-0725-47f9-a8ac-2843233d05a2" />
+
+Focuses on how late deliveries affect customer satisfaction and overall performance metrics.
+- Late Rate KPI
+- Average Delay
+- Review Score Impact Analysis
+- Late Rate by Review Level
+
+**Dashboard 2 – Operational Diagnosis**
+
+<img width="984" height="786" alt="Screenshot 2026-02-19 at 14 13 20" src="https://github.com/user-attachments/assets/a070c001-0a27-4a20-99c0-cc9344337304" />
+
+Identifies operational drivers and risk concentration behind fulfillment failures.
+- Carrier vs Seller Delay Attribution
+- Delivery Component Comparison
+- State-Level Risk Matrix
+- High-Risk Time Period Identification
+
+## 3. Key Business Questions:
 1. **Satisfaction Correlation:** To what extent does delivery delay impact our average Review Scores?
 2. **Bottleneck Diagnosis:** Is the delay caused by sellers (slow dispatch) or logistics partners (slow last-mile delivery)?
 3. **Risk Distribution:** Which geographic regions or seller segments are the primary contributors to fulfillment failure?
-4. **Early Warning Signals:** How can we establish operational metrics to detect logistics risks before negative reviews spike?
+4. **Risk Segmentation & Trend:** Where and when are late delivery risks concentrated?
 
 # Key Performance
 
@@ -27,82 +49,91 @@ Even a single-digit late rate translates into thousands of affected customers, m
 
 # Delivery Delay Strongly Damages Customer Satisfaction
 
-<img width="1012" height="721" alt="Screenshot 2026-02-16 at 13 23 37" src="https://github.com/user-attachments/assets/be992cc5-32ac-4cb5-a556-cd7fec61e5f7" />
+<img width="887" height="720" alt="Screenshot 2026-02-19 at 13 45 12" src="https://github.com/user-attachments/assets/761a28a0-f84e-407f-a332-258993951354" />
 
-Late deliveries result in a **1.73-point drop** in review score:
+Late deliveries result in a **1.9-point drop** in review score:
 
 | Delivery Status | Avg Review |
 |-----------------|------------|
-| On-time         | 4.29       |
-| Late            | 2.57       |
-
-### Critical Threshold Identified
-- 1–2 day delay → moderate dissatisfaction
-- **3+ days delay → review collapse**
-- 6+ days delay → ~70% of orders receive 1-star ratings
+|   Late          | 2.271      |
+|   On-time       | 4.212      |
 
 **Insight:**  
-Preventing delays beyond 3 days dramatically reduces reputation damage.
+Customer satisfaction drops sharply when delivery is late.
+Delivery reliability directly influences reputation risk.
 
+# Late Delivery Rate Decreases as Review Score Increases
+
+<img width="517" height="723" alt="Screenshot 2026-02-19 at 13 54 11" src="https://github.com/user-attachments/assets/c7c7183e-0285-4cdb-802a-96bae23fbfc7" />
+
+| Review Score | 	Late Rate |
+|--------------|------------|
+| 1 ⭐	       |  30.15%    |
+| 2 ⭐	       |  17.65%    |
+| 3 ⭐	       |  8.53%     |
+| 4 ⭐	       |  3.41%     |
+| 5 ⭐	       |  ~1–2%     |
+
+**Insight:**
+Low ratings are strongly correlated with higher late delivery rates.
+Logistics performance is a primary driver of customer dissatisfaction.
 
 # Bottleneck Diagnosis: Carrier is the Primary Risk Driver
 
-<img width="853" height="713" alt="Screenshot 2026-02-16 at 13 24 08" src="https://github.com/user-attachments/assets/3f0ed14f-9436-49fc-a9e3-4c3a8e444c7d" />
+<img width="1050" height="250" alt="Screenshot 2026-02-19 at 13 58 02" src="https://github.com/user-attachments/assets/5711acfa-face-4cd9-a529-6ecf239a6b9e" />
 
 Among late orders:
-- Seller prep increases by ~2 days
-- Carrier time increases by ~18 days
-- 86% of late orders are carrier-driven
-
-As delay severity rises, carrier time grows **non-linearly**, while seller prep time rises modestly.
+- ~80% are carrier-driven
+- Seller-driven delays account for ~15–18%
+- Mixed cases are minimal
 
 **Insight:**  
-Last-mile logistics, not warehouse prep, is the dominant operational bottleneck.
+- Last-mile logistics performance, rather than warehouse prep time, is the dominant contributor to late delivery.
+- Operational focus should prioritize carrier management rather than seller SLAs.
 
+# Delivery Component Comparison
 
-# Risk Concentration: Not All Sellers Are Equal
+<img width="885" height="721" alt="Screenshot 2026-02-19 at 13 57 15" src="https://github.com/user-attachments/assets/58708b8d-70e2-4a67-b050-62e6455d62aa" />
 
-<img width="852" height="710" alt="Screenshot 2026-02-16 at 13 11 25" src="https://github.com/user-attachments/assets/d815b850-7f5c-49b6-86db-45097a1ce440" />
+**Insight:**
+- Carrier time fluctuates significantly across months, while seller prep time remains relatively stable.
+- This suggests that volatility in logistics networks contributes more heavily to delay risk than warehouse operations.
 
-Late rate distribution across sellers is highly uneven.
-A small subset of sellers contribute disproportionately to fulfillment failures.
+# Risk Concentration: State-Level Performance Matrix
+
+<img width="889" height="717" alt="Screenshot 2026-02-19 at 13 56 34" src="https://github.com/user-attachments/assets/8ef23c57-6459-4d1f-b414-30412d359a31" />
+
+**States vary significantly in:**
+- Late rate
+- Seller preparation time
+
+**The matrix enables identification of:**
+- High late-rate & high seller prep risk zones
+- High late-rate but normal prep time → likely carrier-driven regions
 
 **Operational Impact:**
 - Targeted SLA renegotiation
 - Tier-based traffic throttling
 - Risk-weighted seller monitoring
 
-This shifts operations from reactive complaint handling to proactive risk management.
+# Time-Based Risk Concentration
 
-# Early Warning Signal: Rolling 7-Day Late Rate
-<img width="1015" height="713" alt="Screenshot 2026-02-16 at 13 10 07" src="https://github.com/user-attachments/assets/ba70eba1-b93a-48ed-a46f-be85f1e1dbba" />
+<img width="388" height="725" alt="Screenshot 2026-02-19 at 13 59 43" src="https://github.com/user-attachments/assets/f0ebe5ae-4706-4e54-849b-c7f4c77ed4b7" />
 
-Daily late rate is highly volatile.  
-However, a 7-day rolling average provides a stable operational signal.
-Spikes in rolling late rate consistently precede sustained delay waves.
-
-**Business Value:**
-- Acts as early logistics health indicator
-- Enables proactive carrier intervention
-- Prevents downstream review damage
-
+**Insight:**
+Certain months exhibit significantly higher late rates, indicating seasonal or capacity-driven logistics constraints.
 
 # Business Recommendations
 
-### 1. Redefine SLA Around 3-Day Threshold
-Rather than optimizing averages, focus on preventing delays beyond 3 days.
-
-### 2. Carrier-Focused Optimization Strategy
-- Monitor carrier performance using rolling metrics
-- Reallocate volume away from underperforming carriers
-- Implement region-adjusted SLA thresholds
-
-### 3. Tier-Based Seller Governance
-- Intervene on high-risk sellers with sufficient order volume
-- Reduce friction for consistently on-time sellers
-
-### 4. Operationalize Rolling Late Rate
-Embed rolling 7-day late rate into monitoring dashboards as an early warning metric.
+### 1. Carrier-Focused Optimization Strategy
+- Monitor carrier-driven delays
+- Reallocate volume away from underperforming regions
+### 2. Customer Impact Monitoring
+- Track late rate alongside review score metrics
+- Prevent reputation risk from compounding
+### 3. State-Level Risk Governance
+- Identify and intervene in high-risk geographic clusters
+- Adjust SLA expectations regionally
 
 # Technical Implementation
 **SQL (Primary Engine):**
@@ -113,7 +144,7 @@ Embed rolling 7-day late rate into monitoring dashboards as an early warning met
 - Star schema modeling (fact + dimensions)
 
 **Visualization:**
-- Tableau Dashboard
+- Tableau Dashboards
 - KPI monitoring
 - Delay decomposition charts
 - Risk segmentation matrix
